@@ -18,10 +18,10 @@ namespace PEIMSV3Cs
 {
 	public partial class frmCases : Form
 	{
-        MySqlConnection mcon = new MySqlConnection("server=localhost;database=pharma;uid=root;passwrord=");
-        MySqlCommand mcd;
-        MySqlDataReader mdr;
-        string s;
+		MySqlConnection mcon = new MySqlConnection("server=localhost;database=pharma;uid=root;passwrord=");
+		MySqlCommand mcd;
+		MySqlDataReader mdr;
+		string s;
 		private MySqlDataAdapter ad;
 		
 		public frmCases()
@@ -51,7 +51,7 @@ namespace PEIMSV3Cs
 			}
 			casesBindingSource.EndEdit();
 			ad.Update(this.newDataSet.cases);
-            MessageBox.Show("Record Saved");
+			MessageBox.Show("Record Saved");
 			
 		}
 		
@@ -119,77 +119,77 @@ namespace PEIMSV3Cs
 			casesBindingSource.AddNew();
 		}
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            casesBindingSource.AddNew();
-        }
+		private void AddButton_Click(object sender, EventArgs e)
+		{
+			casesBindingSource.AddNew();
+		}
 
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            casesBindingSource.RemoveCurrent();
-            MessageBox.Show("Save the changes!");
-        }
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			casesBindingSource.RemoveCurrent();
+			MessageBox.Show("Save the changes!");
+		}
 
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-            if (!this.Validate()) return;
-            if (((DataRowView)casesBindingSource.Current)["date"] is DBNull)
-            {
-                ((DataRowView)casesBindingSource.Current)["date"] = date_dateTimePicker.Value;
-            }
-            casesBindingSource.EndEdit();
-            ad.Update(this.newDataSet.cases);
-            MessageBox.Show("Record Updated");
-        }
+		private void UpdateButton_Click(object sender, EventArgs e)
+		{
+			if (!this.Validate()) return;
+			if (((DataRowView)casesBindingSource.Current)["date"] is DBNull)
+			{
+				((DataRowView)casesBindingSource.Current)["date"] = date_dateTimePicker.Value;
+			}
+			casesBindingSource.EndEdit();
+			ad.Update(this.newDataSet.cases);
+			MessageBox.Show("Record Updated");
+		}
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            if (!this.Validate()) return;
-            if (((DataRowView)casesBindingSource.Current)["date"] is DBNull)
-            {
-                ((DataRowView)casesBindingSource.Current)["date"] = date_dateTimePicker.Value;
-            }
-            casesBindingSource.EndEdit();
-            ad.Update(this.newDataSet.cases);
-            MessageBox.Show("Record Saved");
-        }
+		private void SaveButton_Click(object sender, EventArgs e)
+		{
+			if (!this.Validate()) return;
+			if (((DataRowView)casesBindingSource.Current)["date"] is DBNull)
+			{
+				((DataRowView)casesBindingSource.Current)["date"] = date_dateTimePicker.Value;
+			}
+			casesBindingSource.EndEdit();
+			ad.Update(this.newDataSet.cases);
+			MessageBox.Show("Record Saved");
+		}
 
-        private void ExitButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+		private void ExitButton_Click(object sender, EventArgs e)
+		{
+			this.Hide();
+		}
 
-        private void SearchIDButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                mcon.Open();
-                s = "select * from pharma.cases where (caseID = '" + caseIDTextBox.Text + "') OR (diseaseID = '" + diseaseIDTextBox.Text + "')";
-                mcd = new MySqlCommand(s, mcon);
-                mdr = mcd.ExecuteReader();
-                if (mdr.Read())
-                {
-                    diseaseIDTextBox.Text = mdr.GetString("diseaseID");
-                    diseaseIDTextBox.Text = mdr.GetString("locationID");
-                    diseaseIDTextBox.Text = mdr.GetString("date");
-                    diseaseIDTextBox.Text = mdr.GetString("cause");
-                    diseaseIDTextBox.Text = mdr.GetString("noOfCasualties");
-                }
-                else
-                {
-                    MessageBox.Show("Record Not Found!");
-                }
-                    
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally 
-            {
-                mdr.Close();
-                mcon.Close();
-            }
-        }
+		private void SearchIDButton_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				mcon.Open();
+				s = "select * from pharma.cases where (caseID = '" + caseIDTextBox.Text + "') OR (diseaseID = '" + diseaseIDTextBox.Text + "')";
+				mcd = new MySqlCommand(s, mcon);
+				mdr = mcd.ExecuteReader();
+				if (mdr.Read())
+				{
+					diseaseIDTextBox.Text = mdr.GetString("diseaseID");
+					diseaseIDTextBox.Text = mdr.GetString("locationID");
+					diseaseIDTextBox.Text = mdr.GetString("date");
+					diseaseIDTextBox.Text = mdr.GetString("cause");
+					diseaseIDTextBox.Text = mdr.GetString("noOfCasualties");
+				}
+				else
+				{
+					MessageBox.Show("Record Not Found!");
+				}
+					
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			finally 
+			{
+				mdr.Close();
+				mcon.Close();
+			}
+		}
 	}
 }

@@ -115,44 +115,44 @@ namespace PEIMSV3Cs
 			orderBindingSource.AddNew();
 		}
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            orderBindingSource.AddNew();
-        }
+		private void AddButton_Click(object sender, EventArgs e)
+		{
+			orderBindingSource.AddNew();
+		}
 
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            orderBindingSource.RemoveCurrent();
-            MessageBox.Show("Save the changes!");
-        }
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			orderBindingSource.RemoveCurrent();
+			MessageBox.Show("Save the changes!");
+		}
 
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-            if (!this.Validate()) return;
-            if (((DataRowView)orderBindingSource.Current)["orderDate"] is DBNull)
-            {
-                ((DataRowView)orderBindingSource.Current)["orderDate"] = orderDate_dateTimePicker.Value;
-            }
-            orderBindingSource.EndEdit();
-            ad.Update(this.newDataSet.order);
-            MessageBox.Show("Record Saved Successfully");
-        }
+		private void UpdateButton_Click(object sender, EventArgs e)
+		{
+			if (!this.Validate()) return;
+			if (((DataRowView)orderBindingSource.Current)["orderDate"] is DBNull)
+			{
+				((DataRowView)orderBindingSource.Current)["orderDate"] = orderDate_dateTimePicker.Value;
+			}
+			orderBindingSource.EndEdit();
+			ad.Update(this.newDataSet.order);
+			MessageBox.Show("Record Saved Successfully");
+		}
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            if (!this.Validate()) return;
-            if (((DataRowView)orderBindingSource.Current)["orderDate"] is DBNull)
-            {
-                ((DataRowView)orderBindingSource.Current)["orderDate"] = orderDate_dateTimePicker.Value;
-            }
-            orderBindingSource.EndEdit();
-            ad.Update(this.newDataSet.order);
-            MessageBox.Show("Record Saved Successfully");
-        }
+		private void SaveButton_Click(object sender, EventArgs e)
+		{
+			if (!this.Validate()) return;
+			if (((DataRowView)orderBindingSource.Current)["orderDate"] is DBNull)
+			{
+				((DataRowView)orderBindingSource.Current)["orderDate"] = orderDate_dateTimePicker.Value;
+			}
+			orderBindingSource.EndEdit();
+			ad.Update(this.newDataSet.order);
+			MessageBox.Show("Record Saved Successfully");
+		}
 
-        private void ExitButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+		private void ExitButton_Click(object sender, EventArgs e)
+		{
+			this.Hide();
+		}
 	}
 }
